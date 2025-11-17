@@ -1,0 +1,27 @@
+---
+- name: Installer apache2 et configure la page d'acceuil
+  hosts: all
+  remote_user: vagrant
+  become: true
+  become_user: root
+
+  tasks:
+    - name: Install apache2 mysql-server
+      ansible.builtin.apt:
+        update_cache: true
+        name: "{{ item }}"
+        state: present
+      loop:
+        - apache2
+        - mysql-server
+
+    - name: Gather the rpm package facts
+      ansible.builtin.package_facts:
+        manager: auto
+
+    - name: Copy index.html if apache2 is installed
+      ansible.builtin.copy:
+        src: files/index.html
+        dest: /var/www/html/index.html
+        mode: '0644'
+      when: "'apache2' in ansible_facts.packages"
