@@ -1,0 +1,12 @@
+---
+# Playbook pour configurer un serveur web
+- name: Check installed packages
+  hosts: webservers
+  remote_user: vagrant
+  become: true
+  become_user: root
+
+  tasks:
+    - name: Vérifier si un fichier existe
+      check_file:
+        path: "/tmp/testfile.txt"

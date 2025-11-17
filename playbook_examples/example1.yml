@@ -1,0 +1,32 @@
+---
+# Playbook pour configurer un serveur web
+- name: Configuration d’un serveur web
+  hosts: webservers
+  remote_user: vagrant
+  become: true
+  become_user: root
+
+  vars:
+    package_name: "nginx"
+    document_root: "/var/www/html"
+
+  tasks:
+    - name: Mettre à jour la liste des paquets
+      apt:
+        update_cache: yes
+
+    - name: Installer le paquet web
+      apt:
+        name: "{{ package_name }}"
+        state: present
+
+    - name: Définir une page d'accueil
+      copy:
+        content: "<h1>Bienvenue sur le serveur web</h1>"
+        dest: "{{ document_root }}/index.html"
+
+    - name: Démarrer et activer le service
+      service:
+        name: "{{ package_name }}"
+        state: started
+        enabled: yes

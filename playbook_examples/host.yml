@@ -1,0 +1,8 @@
+[all]
+127.0.0.1
+
+[webservers]
+192.168.121.70
+
+[all:vars]
+ansible_user=vagrant
