@@ -1,0 +1,17 @@
+- name: Installer et verfier le service apache2
+  hosts: all
+  remote_user: vagrant
+  become: true
+  become_user: root
+
+  tasks:
+  - name: Update cache & Install apache2
+    ansible.builtin.apt:
+      update_cache: yes
+      name: apache2
+      state: present
+
+  - name: Start apache2
+    ansible.builtin.service:
+      state: started
+      name: apache2
