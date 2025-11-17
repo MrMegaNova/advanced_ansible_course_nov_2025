@@ -1,0 +1,16 @@
+---
+- name: Installer vim et vérifier /etc/passwd
+  hosts: all
+  remote_user: vagrant
+  become: true
+  become_user: root
+
+  tasks:
+    - name: Install vim
+      ansible.builtin.apt:
+        name: vim
+        state: present
+
+    - name: Vérifie l'existance de /etc/passwd
+      ansible.builtin.file:
+        path: /etc/passwd
