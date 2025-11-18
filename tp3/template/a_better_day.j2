@@ -1,0 +1,3 @@
+{% set jour = ansible_date_time.day | int %}
+{% set heure = ansible_date_time.hour | int %}
+{{ "impair" if jour % 2 == 1 else "pair" }} et {{ "après" if heure > 12 else "avant" }} midi.
