@@ -1,0 +1,14 @@
+---
+- name: Installer et configurer docker
+  hosts: all
+  remote_user: vagrant
+  become: true
+  become_user: root
+
+  vars:
+    docker_users:
+      - vagrant
+
+  roles:
+    - geerlingguy.docker
+    - geerlingguy.clamav

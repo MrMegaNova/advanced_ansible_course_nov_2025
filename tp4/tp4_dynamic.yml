@@ -1,0 +1,23 @@
+---
+- name: Installer et configurer docker
+  hosts: all
+  remote_user: vagrant
+  become: true
+  become_user: root
+
+  vars:
+    docker_users:
+      - vagrant
+
+  tasks:
+    - name: Un petit message
+      ansible.builtin.debug:
+        msg: "Bonjour avant installation des roles"
+
+    - name: Installation de clamav via role
+      ansible.builtin.include_role:
+        name: geerlingguy.clamav
+
+    - name: Installation de docker via role
+      ansible.builtin.include_role:
+        name: geerlingguy.docker
