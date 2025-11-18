@@ -7,7 +7,7 @@
   tasks:
   - name: Update cache & Install apache2
     ansible.builtin.apt:
-      update_cache: yes
+      update_cache: true
       name: apache2
       state: present
 
