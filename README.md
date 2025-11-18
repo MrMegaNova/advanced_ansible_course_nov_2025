@@ -1,5 +1,21 @@
 ## Advanced ansible course
-# advanced_ansible_course_nov_2025
+advanced_ansible_course Novembre 2025
+
+
+# Installation avec uv
+
+### Nouveau projet
+```(sh)
+uv init
+uv add ansible ansible-lint
+un run ansible-lint --version
+```
+
+### Projet existant
+```(sh)
+uv sync
+un run ansible-lint --version
+```
 
 # Usefull Links
 

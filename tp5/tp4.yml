@@ -1,0 +1,4 @@
+---
+vars:
+  docker_users:
+    - vagrant

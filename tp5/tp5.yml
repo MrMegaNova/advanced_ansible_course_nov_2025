@@ -1,0 +1,24 @@
+---
+- name: Installer et configurer docker
+  hosts: all
+  remote_user: vagrant
+  become: true
+  become_user: root
+
+  tasks:
+    # - name: Import de tp3
+    #   ansible.builtin.import_tasks: ../tp3/tp3.yml
+
+    - name: Inclusion de tp3
+      ansible.builtin.include_tasks: ../tp3/tp3.yml
+
+    - name: Write date time in /etc/last_changed
+      ansible.builtin.lineinfile:
+        path: /etc/last_changed
+        line: "{{ ansible_date_time.date }} {{ ansible_date_time.time }}"
+        mode: "0644"
+        create: true
+      tags: datetime
+
+- name: Import playbook
+  ansible.builtin.import_playbook: ../tp4/tp4.yml

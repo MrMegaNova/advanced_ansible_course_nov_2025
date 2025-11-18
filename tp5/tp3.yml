@@ -1,0 +1,56 @@
+---
+- name: Install apache2 mysql-server on node 1 & 2
+  ansible.builtin.apt:
+    update_cache: true
+    name: "{{ item }}"
+    state: present
+  loop:
+    - apache2
+    - mysql-server
+  when: ansible_hostname != "node3"
+
+- name: Install git, nginx & cowsay on node 3
+  ansible.builtin.apt:
+    update_cache: true
+    name: "{{ item }}"
+    state: present
+  loop:
+    - git
+    - nginx
+    - cowsay
+  when: ansible_hostname == "node3"
+
+- name: Install ufw on ubuntu
+  ansible.builtin.apt:
+    name: ufw
+    state: present
+  when: ansible_distribution == "Ubuntu"
+
+- name: Gather the rpm package facts
+  ansible.builtin.package_facts:
+    manager: auto
+
+- name: Copy index.html if apache2 or nginx is installed
+  ansible.builtin.template:
+    src: template/index.j2
+    dest: /var/www/html/index.html
+    mode: "0644"
+  when: "'apache2' in ansible_facts.packages or 'nginx' in ansible_facts.packages"
+
+- name: Start apache2
+  ansible.builtin.service:
+    name: apache2
+    state: started
+  when: "'apache2' in ansible_facts.packages"
+
+- name: Start nginx
+  ansible.builtin.service:
+    name: nginx
+    state: started
+  when: "'nginx' in ansible_facts.packages"
+
+- name: Placer le jour pair ou impair
+  ansible.builtin.template:
+    src: template/day.j2
+    dest: /etc/jour
+    mode: "0644"
