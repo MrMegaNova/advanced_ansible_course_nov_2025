@@ -2,3 +2,6 @@
 192.168.121.3 ansible_user=vagrant
 192.168.121.148 ansible_user=vagrant
 192.168.121.122 ansible_user=vagrant
+
+[web]
+192.168.121.122 ansible_user=vagrant

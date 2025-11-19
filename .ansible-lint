@@ -9,4 +9,4 @@ warn_list:
 # exclude_paths:
 #   - playbook_examples/
 
-var_naming_pattern: "^[a-z_][a-z0-9_]*$"
+# var_naming_pattern: "^[a-z_][a-z0-9_]*$"
