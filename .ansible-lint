@@ -1,0 +1,12 @@
+# skip_list:
+#   - yaml
+#   - fqcn
+# 
+warn_list:
+   - jinja
+   - yaml
+ 
+# exclude_paths:
+#   - playbook_examples/
+
+var_naming_pattern: "^[a-z_][a-z0-9_]*$"
