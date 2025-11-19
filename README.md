@@ -31,6 +31,10 @@ un run ansible-lint --version
 
 - [Templating Jinja ansible (outdated)](https://docs.ansible.com/projects/ansible/2.9/user_guide/playbooks_templating.html)
 
+- [Ansible var precedence](https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_variables.html#ansible-variable-precedence)
+
+- [Ansible inventory](https://docs.ansible.com/projects/ansible/latest/inventory_guide/intro_inventory.html)
+
 #### Modules: 
 - [Module lineinfile](https://docs.ansible.com/projects/ansible/latest/collections/ansible/builtin/lineinfile_module.html)
 
