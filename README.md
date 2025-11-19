@@ -43,6 +43,8 @@ un run ansible-lint --version
 
 - [Block](https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_blocks.html)
 
+- [Speed up ansible runtime - mitogen](https://mitogen.networkgenomics.com/ansible_detailed.html)
+
 #### Modules: 
 - [Module lineinfile](https://docs.ansible.com/projects/ansible/latest/collections/ansible/builtin/lineinfile_module.html)
 

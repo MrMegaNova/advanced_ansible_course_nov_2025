@@ -1,0 +1,80 @@
+---
+- name: Compare temp
+  hosts: localhost
+  gather_facts: false
+  vars:
+    latitude: 48.85
+    longitude: 2.34
+
+  tasks:
+    - name: Call open-meteo API
+      ansible.builtin.uri:
+        url: "https://api.open-meteo.com/v1/forecast?latitude={{ latitude }}&longitude={{ longitude }}&current=temperature_2m"
+        method: GET
+        return_content: true
+        status_code: 200
+      register: api_response
+
+    - name: Extract temp & time data
+      ansible.builtin.set_fact:
+        current_temp: "{{ api_response.json.current.temperature_2m }}"
+        current_time: "{{ api_response.json.current.time }}"
+        current_hour: "{{ api_response.json.current.time | split('T') | last }}"
+        minified_current_hour: "{{ api_response.json.current.time | split('T') | last | split(':') | first | int }}"
+
+    - name: Show meteo data
+      ansible.builtin.debug:
+        msg: "Il fait: {{ current_temp }}, il est {{ minified_current_hour }} h UTC, plus exactement {{ current_hour }} UTC"
+
+    - name: Read CSV file
+      community.general.read_csv:
+        path: "temperature.csv"
+      register: temperature_csv
+
+    - name: Show CSV content
+      ansible.builtin.debug:
+        var: temperature_csv
+
+    - name: Remove duplicate and sort by date
+      ansible.builtin.set_fact:
+        temperature_cleaned: "{{ temperature_csv.list | sort(attribute='time') | unique }}"
+
+    - name: Show sorted and unique csv
+      ansible.builtin.debug:
+        var: temperature_cleaned
+
+    - name: Get corresponding hour line from csv
+      ansible.builtin.set_fact:
+        hour_line: >-
+          {{
+            temperature_cleaned |
+            selectattr('time', 'search', item) |
+            list
+          }}
+      with_items: "{{ minified_current_hour }}"
+
+    - name: Get only temp
+      ansible.builtin.set_fact:
+        csv_temp: "{{ hour_line[0].temperature }}"
+
+    - name: Show temp from CSV
+      ansible.builtin.debug:
+        var: csv_temp
+
+    - name: API temp is higher than CSV temp
+      ansible.builtin.debug:
+        msg: "Il fait plus chaud que ({{ csv_temp }} °C), il fait actuellement {{ current_temp }}"
+      when: csv_temp | int < current_temp | int
+
+    - name: API temp is lower than CSV temp
+      ansible.builtin.debug:
+        msg: "Il plus frais que ({{ csv_temp }} °C), il fait actuellement {{ current_temp }}"
+      when: csv_temp | int > current_temp | int
+
+    - name: Temp message
+      ansible.builtin.set_fact:
+        temp_message: "Il fait actuellement({{ csv_temp }} °C)"
+
+    - name: Allez-vous comprendre
+      ansible.builtin.debug:
+        msg: "{{ temp_message | reverse_string }}"
