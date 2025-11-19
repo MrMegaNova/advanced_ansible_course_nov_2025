@@ -1,0 +1,7 @@
+# Wordpress vars
+wordpress_db_name: wordpress
+wordpress_db_username: wordpress
+wordpress_db_password: wordpress_secure_password
+
+# Database vars
+mariadb_root_password: my_super_password

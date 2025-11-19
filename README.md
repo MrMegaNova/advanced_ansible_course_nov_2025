@@ -45,6 +45,10 @@ un run ansible-lint --version
 
 - [Speed up ansible runtime - mitogen](https://mitogen.networkgenomics.com/ansible_detailed.html)
 
+- [Ansible role](https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_reuse_roles.html)
+
+- [Molecule](https://docs.ansible.com/projects/molecule/)
+
 #### Modules: 
 - [Module lineinfile](https://docs.ansible.com/projects/ansible/latest/collections/ansible/builtin/lineinfile_module.html)
 
