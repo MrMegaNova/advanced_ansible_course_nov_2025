@@ -35,6 +35,10 @@ un run ansible-lint --version
 
 - [Ansible inventory](https://docs.ansible.com/projects/ansible/latest/inventory_guide/intro_inventory.html)
 
+- [Use ansible filters](https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_filters.html)
+
+- [Ansible filters list](https://docs.ansible.com/projects/ansible/2.9/user_guide/playbooks_filters.html)
+
 #### Modules: 
 - [Module lineinfile](https://docs.ansible.com/projects/ansible/latest/collections/ansible/builtin/lineinfile_module.html)
 
