@@ -39,6 +39,10 @@ un run ansible-lint --version
 
 - [Ansible filters list](https://docs.ansible.com/projects/ansible/2.9/user_guide/playbooks_filters.html)
 
+- [Delegation](https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_delegation.html)
+
+- [Block](https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_blocks.html)
+
 #### Modules: 
 - [Module lineinfile](https://docs.ansible.com/projects/ansible/latest/collections/ansible/builtin/lineinfile_module.html)
 
