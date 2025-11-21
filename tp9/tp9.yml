@@ -1,0 +1,16 @@
+---
+- name: Générer et écrire un mot de passe aléatoire
+  hosts: localhost
+
+  tasks:
+    - name: Générer un mot de passe spécial de 28 caractères
+      password_generator:
+        chars: special
+        length: 28
+      register: pwd
+
+    - name: Écrire le mot de passe dans /etc/my_generated_password
+      ansible.builtin.copy:
+        dest: /etc/my_generated_password
+        content: "{{ pwd.password }}"
+        mode: '0600'

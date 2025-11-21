@@ -5,3 +5,5 @@ participants/
 .ansible
 playbook_examples/library/__pycache__/
 uv.lock
+__pycache__/
+*.pyc
